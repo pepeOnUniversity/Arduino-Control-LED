@@ -1,20 +1,18 @@
-//assign pin 6 for LED
-int LED = 6;
+//assign pin for list LED
+int led[] = { 6, 5, 4 };
 
 void setup() {
-  //set LED is OUTPUT
-  pinMode(LED, OUTPUT);
+  //set list LED is OUTPUT
+  for (int i = 0; i <= 2; i++) {
+    pinMode(led[i], OUTPUT);
+  }
 }
 
 void loop() {
-  //turn on LED
-  digitalWrite(LED, HIGH);
-  //delay 200ms
-  delay(200);
-  //turn off LED
-  digitalWrite(LED, LOW);
-  //delay 200ms
-  delay(200);
+  for (int i = 0; i <= 2; i++) {
+    digitalWrite(led[i], HIGH);
+    delay(200);
+    digitalWrite(led[i], LOW);
+    delay(200);
+  }
 }
-
-
