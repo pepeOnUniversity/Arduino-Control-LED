@@ -1,18 +1,21 @@
-//assign pin for list LED
-int led[] = { 6, 5, 4 };
+//declear
+int led = 6;
+int button = 2;
+
 
 void setup() {
-  //set list LED is OUTPUT
-  for (int i = 0; i <= 2; i++) {
-    pinMode(led[i], OUTPUT);
-  }
+  pinMode(led, OUTPUT);
+  pinMode(button, INPUT);
 }
 
 void loop() {
-  for (int i = 0; i <= 2; i++) {
-    digitalWrite(led[i], HIGH);
-    delay(200);
-    digitalWrite(led[i], LOW);
-    delay(200);
+  //read value of button
+  int state = digitalRead(button);
+
+  //check value of state
+  if(state == LOW){
+    digitalWrite(led, LOW);
+  } else {
+    digitalWrite(led, HIGH);
   }
 }
