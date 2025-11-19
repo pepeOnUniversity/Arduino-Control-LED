@@ -1,4 +1,4 @@
-Day 1 of the Master IOT Journey
+**Day 1 of the Master IOT Journey**
 
 
 Control 1 LED
