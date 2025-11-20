@@ -30,8 +30,25 @@ Therefore, only when press the button, the current intensity (I) move from (2b (
 The resistor of pin in Arduino is about 100.000.000 Ohm (very big) -> these pins no draw I (becase follow Ohm's LAW, when R >> -> I ~ 0)
 But, when press button, U from 2b -> button -> 1a -> pin2 of arduino.
 
-- Reason of choose resitor 10k Ohm to connect button with GND:
+_Reason of choose resitor 10k Ohm to connect button with GND:_
 + With R = 10.000 -> I = U/R = 5/1000 = 5 (mA) << very small -> safe for board Arduino. If I >>, when I comeback GND of Arduino, it causes hot and danger for board Arduino.
 + Save power :v 
 
 
+4. INPUT_PULLUP
+
+PULL_UP, it means PULL UP value of register on Arduino -> (20k, 50k Ohm)
+<img width="1345" height="629" alt="image" src="https://github.com/user-attachments/assets/8d6e20f4-4e6a-4f56-a3d6-bfdb3b908b31" />
+
+Alternation for resistor 10k Ohm, I can use technical INPUT_PULLUP
+
+When we use PULLUP, the Arduino auto connect VCC (5V) with pin D2 through register, which PULL UP when I declear pinMode(button, INPUT_PULLUP). When I haven't press button, 5V -> Resistor (PULLUP) -> D2, so pin D2 read voltage level HIGH because VCC pull pin D2 up HIGH, but in fact, not have current intensity run in board because I dont have place that for current intensity reduce 0 (which we call GND), but when I haven't press button, board not connect with GND :v 
+I can caculate value of Voltage level at pin D2 by:
+
+                V_D2 = I * R2
+                V_D2 = (U/R) * R2
+                V_D2 = (5/R2 + R_pullup) ~ 5V
+                
+When I press the button, open board -> close board. Current intensity run 5V -> register -> button (2a) -> button (1b) -> GND. At this time, current intensity from pin from D2 to GND faster than current intensity from 5V -> pin D2 because between D2 and GND dont have rerister, so it cause pull down for pin D2. Now, pin D2 can consider dont have Voltage level, because Voltage output >> Voltage input -> digitalRead(button) return value LOW. 
+
+                
