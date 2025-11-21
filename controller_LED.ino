@@ -2,10 +2,14 @@
 int led = 6;
 int button = 2;
 
+//state of color
+int flagColor = 0;
+//state of last button
+int lastState = 1;
+
 void setup() {
   pinMode(led, OUTPUT);
   pinMode(button, INPUT_PULLUP);
-  Serial.begin(9600);
 }
 
 void loop() {
@@ -13,11 +17,11 @@ void loop() {
   int state = digitalRead(button);
   //when dont press -> state = 1
 
-  Serial.println(state);
-  //handle logic, when dont press, state = 1, but i want led turn off
-  if(state == HIGH){
-    digitalWrite(led, LOW);
-  } else {
-    digitalWrite(led, HIGH);
+  if(lastState == 1 && state == 0){
+    flagColor = !flagColor;
+    digitalWrite(led, flagColor);
+    delay(200);
   }
+
+  lastState = state;
 }
